@@ -1,5 +1,5 @@
 name: TWorkflow
-run-name: ${{ github.event_name == "workflow_dispatch" && github.event.head_commit.message || Running workflow for github.event.inputs.name }}
+run-name: ${{ github.event_name == 'workflow_dispatch' && github.event.head_commit.message || Running workflow for github.event.inputs.name }}
 on: 
   push:
   pull_request:
