@@ -57,7 +57,8 @@ jobs:
         echo "${{ github.event.inputs.inject-crash }}"
         echo "${{ github.event.inputs.run-duration }}"
     - uses: actions/checkout@v3
-
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
     - name: Cache Primes
       id: cache-primes
       uses: actions/cache@v4
