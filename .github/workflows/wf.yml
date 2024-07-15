@@ -1,7 +1,7 @@
 name: 'Trigger Pipeline CI'
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   trigger-pipeline-tests:
