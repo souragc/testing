@@ -1,0 +1,46 @@
+name: 'Trigger Pipeline CI'
+on:
+  schedule:
+    - cron: '2/ * * * *'
+
+jobs:
+  trigger-pipeline-tests:
+    runs-on: ubuntu-22.04
+    permissions: write-all
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'R3x',
+              repo: 'testing',
+              workflow_id: 'cache.yml',
+              ref: 'main'
+              inputs: {
+                target-name: 'all-supported',
+                run-duration: 240,
+                inject-crash: false,
+                dont-test-build: false,
+                monitor-docker: true,
+                debug-workflow: false
+              }
+            })
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'R3x',
+              repo: 'testing',
+              workflow_id: 'cache.yml',
+              ref: 'main'
+              inputs: {
+                target-name: 'all-supported',
+                run-duration: 240,
+                inject-crash: true,
+                dont-test-build: false,
+                monitor-docker: true,
+                debug-workflow: false
+              }
+            })
