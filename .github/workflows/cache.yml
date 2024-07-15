@@ -5,17 +5,57 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      name:
+      target-name:
         type: choice
+        description: Which target to run
+        default: all-supported
         options:
-          - op1
-          - op2
+          - blah
+      build-run-id:
+        default: fresh
+        description: What run-id to start from using the  backup and shared
+        type: string
+      run-duration:
+        type: choice
+        description: How long to run the pipeline (in mins)
+        default: 10
+        options:
+          - 5
+          - 10
+          - 30
+          - 60
+          - 120
+          - 240
+      inject-crash:
+        type: boolean
+        description: Do you want to inject crashes (all targets - check injectables)
+        default: false
+      dont-test-build:
+        type: boolean
+        description: Directly run the pipeline without testing the build
+        default: true
+      monitor-docker:
+        type: boolean
+        description: Monitor docker runs
+        default: false
+      debug-workflow:
+        type: boolean
+        description: Do you want to debug the run via ssh
+        default: false
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+    - name: asd
+      shell: bash
+      run: | 
+        echo "${{ github.event.inputs.target-name }}"
+        echo "${{ github.event.inputs.debug-workflow }}"
+        echo "${{ github.event.inputs.inject-crash }}"
+        echo ""${{ github.event.inputs.run-duration }}"
     - uses: actions/checkout@v3
 
     - name: Cache Primes
