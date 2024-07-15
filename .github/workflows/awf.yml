@@ -19,7 +19,7 @@ jobs:
               ref: 'main',
               inputs: {
                 'target-name': 'blah',
-                'run-duration': 240,
+                'run-duration': '240',
                 'inject-crash': false,
                 'dont-test-build': false,
                 'monitor-docker': true,
