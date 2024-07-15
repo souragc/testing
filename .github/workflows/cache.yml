@@ -55,7 +55,7 @@ jobs:
         echo "${{ github.event.inputs.target-name }}"
         echo "${{ github.event.inputs.debug-workflow }}"
         echo "${{ github.event.inputs.inject-crash }}"
-        echo ""${{ github.event.inputs.run-duration }}"
+        echo "${{ github.event.inputs.run-duration }}"
     - uses: actions/checkout@v3
 
     - name: Cache Primes
